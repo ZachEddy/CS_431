@@ -23,7 +23,7 @@ import java.io.*;
 import java.util.*;
 import javax.imageio.ImageIO;
 
-public class GraphicsWindow extends Frame {
+class GraphicsWindow extends Frame {
     private BufferedImage image, backImage;
     private int leftOffset, topOffset;
 
@@ -40,7 +40,7 @@ public class GraphicsWindow extends Frame {
      */
 
     public GraphicsWindow(String title, int width, int height, int x, int y) {
-	this(title, null, width, height, x, y, false);
+    this(title, null, width, height, x, y, false);
     }
 
     /** 
@@ -56,7 +56,7 @@ public class GraphicsWindow extends Frame {
      */
 
     public GraphicsWindow(String title, int width, int height, int x, int y, boolean doDoubleBuffering) {
-	this(title, null, width, height, x, y, doDoubleBuffering);
+    this(title, null, width, height, x, y, doDoubleBuffering);
     }
 
     /** 
@@ -73,36 +73,36 @@ public class GraphicsWindow extends Frame {
      */
 
     public GraphicsWindow(String title, Image icon, int width, int height, int x, int y, boolean doDoubleBuffering) {
-	super(title); // call the Frame constructor, on which this object is based
+    super(title); // call the Frame constructor, on which this object is based
 
-	// if an image was passed, use it as the icon
-	if (icon != null) setIconImage(icon);
+    // if an image was passed, use it as the icon
+    if (icon != null) setIconImage(icon);
 
-	setLocation(x, y);
+    setLocation(x, y);
 
-	// set the window to close, when the user hits the close button
-	addWindowListener(new WindowAdapter() {public void windowClosing(WindowEvent e) {destroy();}});
+    // set the window to close, when the user hits the close button
+    addWindowListener(new WindowAdapter() {public void windowClosing(WindowEvent e) {destroy();}});
 
-	// calculate offsets for border, title bar, etc.
-	setVisible(true);
-	setResizable(false);
-	Insets insets = getInsets();
-	leftOffset = insets.left;
-	topOffset = insets.top;
+    // calculate offsets for border, title bar, etc.
+    setVisible(true);
+    setResizable(false);
+    Insets insets = getInsets();
+    leftOffset = insets.left;
+    topOffset = insets.top;
 
-	// set the size to be big enough for all that
-	setSize(width+leftOffset+insets.right, height+topOffset+insets.bottom);
+    // set the size to be big enough for all that
+    setSize(width+leftOffset+insets.right, height+topOffset+insets.bottom);
 
-	// define the images inside the window (with no double buffering, they are aliases)
-	image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-	if (doDoubleBuffering) backImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-	else backImage = image;
+    // define the images inside the window (with no double buffering, they are aliases)
+    image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+    if (doDoubleBuffering) backImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+    else backImage = image;
 
-	// paint a black rectangle, as the first image
-	paintBackground(Color.BLACK);
+    // paint a black rectangle, as the first image
+    paintBackground(Color.BLACK);
 
-	// paint the whole thing
-	repaint();
+    // paint the whole thing
+    repaint();
     }
 
     /** 
@@ -111,7 +111,7 @@ public class GraphicsWindow extends Frame {
      */
 
     public void copyBack() {
-	backImage.createGraphics().drawImage(image, null, 0, 0);
+    backImage.createGraphics().drawImage(image, null, 0, 0);
     }
 
     /** 
@@ -121,8 +121,8 @@ public class GraphicsWindow extends Frame {
      */
 
     public void destroy() {
-	image = backImage = null;
-	dispose();
+    image = backImage = null;
+    dispose();
     }
 
     /** 
@@ -133,7 +133,7 @@ public class GraphicsWindow extends Frame {
      */
 
     public void finalize() {
-	repaint();
+    repaint();
     }
 
     /** 
@@ -143,10 +143,10 @@ public class GraphicsWindow extends Frame {
      */
 
     public void flip() {
-	BufferedImage swap = backImage;
-	backImage = image;
-	image = swap;
-	repaint();
+    BufferedImage swap = backImage;
+    backImage = image;
+    image = swap;
+    repaint();
     }
 
     /** 
@@ -156,7 +156,7 @@ public class GraphicsWindow extends Frame {
      */
 
     public Graphics2D getGraphics2D() {
-	return backImage.createGraphics();
+    return backImage.createGraphics();
     }
 
     /** 
@@ -167,7 +167,7 @@ public class GraphicsWindow extends Frame {
      */
 
     public Graphics2D getPen() {
-	return getGraphics2D();
+    return getGraphics2D();
     }
 
     /** 
@@ -177,7 +177,7 @@ public class GraphicsWindow extends Frame {
      */
 
     public int getImageHeight() {
-	return image.getHeight();
+    return image.getHeight();
     }
 
     /** 
@@ -187,7 +187,7 @@ public class GraphicsWindow extends Frame {
      */
 
     public int getImageWidth() {
-	return image.getWidth();
+    return image.getWidth();
     }
 
     /** 
@@ -199,14 +199,14 @@ public class GraphicsWindow extends Frame {
      */
 
     public static BufferedImage loadImage(String filename) {
-	BufferedImage image;
-	try {
-	    return ImageIO.read(new File(filename));
-	}
-	catch (IOException e) {
-	    System.err.println("Had a problem loading " +filename+ ".");
-	    return null;
-	}
+    BufferedImage image;
+    try {
+        return ImageIO.read(new File(filename));
+    }
+    catch (IOException e) {
+        System.err.println("Had a problem loading " +filename+ ".");
+        return null;
+    }
     }
 
     /** 
@@ -220,23 +220,23 @@ public class GraphicsWindow extends Frame {
      */
 
     public static BufferedImage[] loadImageAsTiles(String filename, int tileSize) {
-	int i;
+    int i;
 
-	BufferedImage master;
-	BufferedImage[] tiles;
-	int tileHeight;
+    BufferedImage master;
+    BufferedImage[] tiles;
+    int tileHeight;
 
-	// load up the big image
-	master = loadImage(filename);
+    // load up the big image
+    master = loadImage(filename);
 
-	// get a bunch of tiles, that are subimages of the big one
-	tileHeight = master.getHeight();
-	tiles = new BufferedImage[master.getWidth() / tileSize];
-	for (i=0; i<tiles.length; i++) {
-	    tiles[i] = master.getSubimage(i*tileSize, 0, tileSize, tileHeight);
-	}
+    // get a bunch of tiles, that are subimages of the big one
+    tileHeight = master.getHeight();
+    tiles = new BufferedImage[master.getWidth() / tileSize];
+    for (i=0; i<tiles.length; i++) {
+        tiles[i] = master.getSubimage(i*tileSize, 0, tileSize, tileHeight);
+    }
 
-	return tiles;
+    return tiles;
     }
 
     /** 
@@ -251,23 +251,23 @@ public class GraphicsWindow extends Frame {
      */
 
     public static BufferedImage[][] loadImageAsTiles(String filename, int tileWidth, int tileHeight) {
-	int i, j;
+    int i, j;
 
-	BufferedImage master;
-	BufferedImage[][] tiles;
+    BufferedImage master;
+    BufferedImage[][] tiles;
 
-	// load up the big image
-	master = loadImage(filename);
+    // load up the big image
+    master = loadImage(filename);
 
-	// get a bunch of tiles, that are subimages of the big one
-	tiles = new BufferedImage[master.getHeight() / tileHeight][master.getWidth() / tileWidth];
-	for (i=0; i<tiles.length; i++) {
-	    for (j=0; j<tiles[i].length; j++) {
-		tiles[i][j] = master.getSubimage(j*tileWidth, i*tileHeight, tileWidth, tileHeight);
-	    }
-	}
+    // get a bunch of tiles, that are subimages of the big one
+    tiles = new BufferedImage[master.getHeight() / tileHeight][master.getWidth() / tileWidth];
+    for (i=0; i<tiles.length; i++) {
+        for (j=0; j<tiles[i].length; j++) {
+        tiles[i][j] = master.getSubimage(j*tileWidth, i*tileHeight, tileWidth, tileHeight);
+        }
+    }
 
-	return tiles;
+    return tiles;
     }
 
     /** 
@@ -279,7 +279,7 @@ public class GraphicsWindow extends Frame {
 
     @Override
     public void paint(Graphics pen) {
-	pen.drawImage(image, leftOffset, topOffset, null);
+    pen.drawImage(image, leftOffset, topOffset, null);
     }
 
     /** 
@@ -289,13 +289,13 @@ public class GraphicsWindow extends Frame {
      */
 
     public void paintBackground(Color color) {
-	Graphics pen = image.createGraphics();
-	pen.setColor(color);
-	pen.fillRect(0, 0, image.getWidth(), image.getHeight());
+    Graphics pen = image.createGraphics();
+    pen.setColor(color);
+    pen.fillRect(0, 0, image.getWidth(), image.getHeight());
 
-	pen = backImage.createGraphics();
-	pen.setColor(color);
-	pen.fillRect(0, 0, backImage.getWidth(), backImage.getHeight());
+    pen = backImage.createGraphics();
+    pen.setColor(color);
+    pen.fillRect(0, 0, backImage.getWidth(), backImage.getHeight());
     }
 
     /** 
@@ -305,11 +305,11 @@ public class GraphicsWindow extends Frame {
      */
 
     public static void sleep(int milliseconds) {
-	try {
-	    Thread.sleep(milliseconds);
-	} catch (InterruptedException e) {
-	    // do nothing if sleep got interrupted
-	}
+    try {
+        Thread.sleep(milliseconds);
+    } catch (InterruptedException e) {
+        // do nothing if sleep got interrupted
+    }
     }
 
     /** 
@@ -320,7 +320,7 @@ public class GraphicsWindow extends Frame {
      */
 
     public int translateWindowX(int windowX) {
-	return windowX - leftOffset;
+    return windowX - leftOffset;
     }
 
     /** 
@@ -331,7 +331,7 @@ public class GraphicsWindow extends Frame {
      */
 
     public int translateWindowY(int windowY) {
-	return windowY - topOffset;
+    return windowY - topOffset;
     }
 
     /** 
@@ -342,7 +342,7 @@ public class GraphicsWindow extends Frame {
 
     @Override
     public void update(Graphics graphics) {
-	paint(graphics);
+    paint(graphics);
     } 
 
     /** 
@@ -351,12 +351,12 @@ public class GraphicsWindow extends Frame {
      * @since 1.0
      */
      public void writeAsPNG(String filename) {
-	// output to disk
-	try {
-	    ImageIO.write(image, "PNG", new File(filename));
-	}
-	catch (IOException ex) {
-	    System.err.println("ERROR: Couldn't write to file \"" +filename+"\".");
-	}
+    // output to disk
+    try {
+        ImageIO.write(image, "PNG", new File(filename));
+    }
+    catch (IOException ex) {
+        System.err.println("ERROR: Couldn't write to file \"" +filename+"\".");
+    }
     }
 }

@@ -18,7 +18,7 @@ import java.awt.image.BufferedImage;
  * @version     1.0
  */
 
-public class SlidingPuzzle {
+class SlidingPuzzle {
     private static final int TILE_SIZE = 100, HALF_TILE = TILE_SIZE/2;
     private static final Color TILE_COLOR = new Color(255, 192, 128), NUMBER_COLOR = new Color(128, 64, 0), BACKGROUND_COLOR = Color.BLACK;
     private static final int FRAMES_PER_MOVE = 25;
@@ -227,7 +227,8 @@ public class SlidingPuzzle {
     // where's the gap square?
     private void findGap() {
 	for (int i=0; i<tiles.length; i++) {
-	    for (int j=0; j<tiles.length; j++) {
+	    for (int j=0; j<tiles[0].length; j++) 
+	    {
 		if (tiles[i][j] == 0) {
 		    gapX = j;
 		    gapY = i;

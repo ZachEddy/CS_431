@@ -1,4 +1,4 @@
-public class HumanConnectFourPlayer implements ConnectFourPlayer {
+class HumanConnectFourPlayer implements ConnectFourPlayer {
     private byte side; // -1 or 1, depending on which side this is
     private ConnectFour game; // pointer back to the game, to control graphics
     

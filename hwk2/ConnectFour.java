@@ -16,7 +16,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Area;
 
-public class ConnectFour {
+class ConnectFour {
     private static final int DEFAULT_WIDTH = 7, DEFAULT_HEIGHT = 6, DEFAULT_SPACE_SIZE = 100;
     private static final double TOKEN_RATIO = 0.9;
     private static final Color RACK_COLOR = new Color(255, 255, 201), BACKGROUND_COLOR = Color.BLACK;

@@ -43,7 +43,7 @@ class ConnectFour {
 	int computerLevel = 1;
 	if (args.length >= 1) computerLevel = parseInt(args[0]);
 	
-	c4.playGame(0, computerLevel);
+	c4.playGame(2,2);
 	c4.endGame();
     }
 

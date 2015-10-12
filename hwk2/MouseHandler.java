@@ -23,7 +23,7 @@ public class MouseHandler extends MouseAdapter {
 
     /**
      * Clears both clicks and movement.
-     * @since 1.0
+     * @since 1.0   
      */
     public void clearAll() {
 	clearClick();

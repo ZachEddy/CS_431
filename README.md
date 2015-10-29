@@ -27,7 +27,11 @@ on domain knowledge to avoid frivolously exploring bad solutions (i.e. halting s
 In this case, domain knowledge is exploited by calculating how far away each tile is from its goal position. Paths that result
 in sliding tiles closer to the goal state will be explored first.
 
+The GUI interface is provided by Adam.
 
 ### Homework 2 - Connect Four Bot
 
+How to play Connect Four: https://en.wikipedia.org/wiki/Connect_Four
+
+The objective is straightforward - use the MiniMax algorithm to create a bot that can make moves intelligently.
 

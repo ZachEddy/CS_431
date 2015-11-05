@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 interface DataParser
 {
-	public ArrayList<int[]> getTestSet();
-	public ArrayList<int[]> getTuningSet();
-	public void ParseData();
-
+	public DataSet parseData();
+	// public void printDecisionTree(DecisionTree tree);
 }

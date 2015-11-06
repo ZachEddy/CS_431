@@ -12,135 +12,22 @@ class DecisionTree
 	public DecisionTree(DataParser parser)
 	{
 		DataSet dataSet = parser.parseData();
-		// this.parser = parser;
 		this.testSet = dataSet.testSet;
 		this.tuneSet = dataSet.tuneSet;
 		this.featureSizes = dataSet.featureSizes;
 		root = constructTree(testSet);
-		
-		
-
-		
-		// System.out.println(treeAccuracy(root.get(0)));
-
-		tuneTree(root);
-		// double correct = 0;
-		// for(int[] group : tuneSet) 
-		// {
-			
-		// 	if(group[0] == findOutcome(group, root))
-		// 		correct++;
-			
-
-
-		// 	// System.out.println(group[0] == findOutcome(group));
-		// }
-		// System.out.println((correct/tuneSet.size()) * 100);
-
-		// System.out.println(findOutcome(tuneSet.get(1)));
 	}
 
 	public DecisionNode constructTree(ArrayList<int[]> set)
 	{
-		// boolean[] visited = new boolean[categorySizes.length]; //defaults to false
 		System.out.println(set == null);
 		ArrayList<Integer> visited = new ArrayList<Integer>();
 		for(int i = 1; i < featureSizes.length; i++)
+		{
 			visited.add(i);
+		}
 		return constructTree(set, visited);
 	}
-
-
-	// public DecisionNode constructTree(ArrayList<int[]> set, ArrayList<Integer> visited)
-	// {
-	// 	// System.out.println(visited);
-	// 	DecisionNode node = new DecisionNode(set, true);
-	// 	if(isPure(set))
-	// 	{
-	// 		node.decision = set.get(0)[0];
-	// 		node.terminal = true;
-	// 		return node;
-
-	// 	}
-	// 	double[] informationGain = calcInformationGain(set, visited);
-	// 	int maxIndex = visited.get(0);
-	// 	for(Integer i : visited)
-	// 	{
-	// 		if(informationGain[i] > informationGain[maxIndex])
-	// 			maxIndex = i;
-	// 	}
-	// 	if(informationGain[maxIndex] == 0)
-	// 	{
-	// 		node.terminal = true;
-	// 		return node;
-	// 	}
-	// 	ArrayList<ArrayList<int[]>> subgroups = getSubgroups(set, maxIndex);
-	// 	ArrayList<Integer> newVisited = new ArrayList<Integer>();
-	// 	newVisited.addAll(visited);
-	// 	newVisited.remove(newVisited.indexOf(maxIndex));
-	// 	int counter = 0;
-	// 	for(ArrayList<int[]> group : subgroups)
-	// 	{
-	// 		if(group.size() == 0)
-	// 		{
-	// 			node.terminal = true;
-	// 			return node;
-	// 		}
-	// 		DecisionNode childNode = constructTree(group, newVisited);
-	// 		childNode.decision = counter;
-	// 		childNode.terminal = false;
-	// 		childNode.category = maxIndex;
-	// 		node.children.add(childNode);
-	// 		counter++;
-	// 	}
-	// 	return node;
-
-
-
-
-	// 	// DecisionNode node = new DecisionNode(set, false);
-	// 	// double[] informationGain = calcInformationGain(set, visited);
-	// 	// int maxIndex = visited.get(0);
-	// 	// for(Integer i : visited)
-	// 	// {
-	// 	// 	if(informationGain[i] > informationGain[maxIndex])
-	// 	// 		maxIndex = i;
-	// 	// }
-	// 	// node.category = maxIndex;
-	// 	// if(informationGain[maxIndex] == 0)
-	// 	// {
-	// 	// 	// System.out.println("Stopped because informaiton gain is zero");
-	// 	// 	return node;
-	// 	// }
-	// 	// ArrayList<ArrayList<int[]>> subgroups = getSubgroups(set, maxIndex);
-	// 	// ArrayList<Integer> newVisited = new ArrayList<Integer>();
-	// 	// newVisited.addAll(visited);
-	// 	// newVisited.remove(newVisited.indexOf(maxIndex));
-		
-	// 	// int counter = 0;
-	// 	// for(ArrayList<int[]> group : subgroups)
-	// 	// {
-	// 	// 	// node.decision = counter;
-			
-	// 	// 	if(group.size() == 0)
-	// 	// 	{
-	// 	// 		// DecisionNode childNode = new DecisionNode(group, true);
-	// 	// 		// childNode.decision = counter;
-	// 	// 		// node.children.add(childNode);
-	// 	// 		return node;
-	// 	// 	}
-	// 	// 	DecisionNode childNode = constructTree(group, newVisited);
-	// 	// 	childNode.decision = counter;
-
-	// 	// 	node.children.add(childNode);
-
-	// 	// 	counter++;
-	// 	// }
-	// 	// return node;
-	// }
-
-
-
 
 	public DecisionNode constructTree(ArrayList<int[]> set, ArrayList<Integer> visited)
 	{
@@ -157,17 +44,17 @@ class DecisionTree
 		}
 		double[] informationGain = calcInformationGain(set, visited);
 		int maxIndex = visited.get(0);
-		for(Integer i : visited)
+		for(Integer gainIndex : visited)
 		{
-			if(informationGain[i] > informationGain[maxIndex])
+			if(informationGain[gainIndex] > informationGain[maxIndex])
 			{
-				maxIndex = i;
+				maxIndex = gainIndex;
 			}
 		}
 		if(informationGain[maxIndex] <= 0)
 		{
 			DecisionNode terminal = new DecisionNode(set, true);
-			terminal.outcome = findMajorityFeature(set);
+			terminal.outcome = findMajorityOutcome(set);
 			return terminal;
 		}
 		ArrayList<ArrayList<int[]>> subgroups = getSubgroups(set, maxIndex);
@@ -184,147 +71,48 @@ class DecisionTree
 			decision.decision = counter;
 			if(group.size() == 0)
 			{
-				decision.outcome = findMajorityFeature(set);
+				decision.outcome = findMajorityOutcome(set);
 			}
+			parent.outcome = findMajorityOutcome(set);
 			parent.children.add(decision);
 			counter++;
 		}
 		return parent;
-
-
-		// if(isPure(set))
-		// {
-		// 	DecisionNode node = new DecisionNode(set, true);
-		// 	node.terminal = true;
-		// 	node.decision = set.get(0)[0];
-		// 	return node;
-		// }
-		// DecisionNode node = new DecisionNode(set, false);
-		// double[] informationGain = calcInformationGain(set, visited);
-		// int maxIndex = visited.get(0);
-		// for(Integer i : visited)
-		// {
-		// 	if(informationGain[i] > informationGain[maxIndex])
-		// 	{
-		// 		maxIndex = i;
-		// 	}
-		// }
-		// node.category = maxIndex;
-		// if(informationGain[maxIndex] <= 0)
-		// {
-		// 	node.terminal = true;
-		// 	return node;
-		// }
-		// ArrayList<ArrayList<int[]>> subgroups = getSubgroups(set, maxIndex);
-		// ArrayList<Integer> newVisited = new ArrayList<Integer>();
-		// newVisited.addAll(visited);
-		// newVisited.remove(newVisited.indexOf(maxIndex));
-		// int counter = 0;
-		// for(ArrayList<int[]> group : subgroups)
-		// {
-		// 	if(group.size() == 0)
-		// 	{
-
-		// 		//find parent majority
-		// 		node.decision = counter;
-		// 		node.terminal = true;
-		// 		return node;
-		// 	}
-		// 	DecisionNode childNode = constructTree(group, newVisited);
-		// 	childNode.decision = counter;
-		// 	node.terminal = false;
-		// 	node.children.add(childNode);
-		// 	counter++;
-		// }
-		// return node;
 	}
-		// for(int i = 0; i < informationGain.length; i++)
-		// {
-		// 	if(!visited.contains(i) && informationGain[i] == 0)
-		// 	{
 
-
-
-		// 		// System.out.println("hello world!");
-		// 		// return null;
-		// 	}
-
-
-
-		// }
-		// int category = maxGainIndex(informationGain);
-		// ArrayList<Integer> v = new ArrayList<Integer>();
-		// v.addAll(visited);
-		// // visited.add(category);
-
-		// ArrayList<ArrayList<int[]>> subgroups = getSubgroups(set, category);
-		// node.decision = category;
-			
-		// for(ArrayList<int[]> group : subgroups)
-		// {
-		// 	if(group.size() == 0)
-		// 	{
-		// 		// for()
-
-
-		// 		// node.decision = 
-		// 		continue;
-		// 	}
-			
-
-		// 	System.out.println("Category: " + category);
-		// 	System.out.println("Size: " + group.size());
-		// 	node.children.add(constructTree(group, visited));
-			
-		// }
-		// System.out.println();
-		// return node;
-	// }
-
-	public int findMajorityFeature(ArrayList<int[]> set)
+	public int findMajorityOutcome(ArrayList<int[]> set)
 	{
 		int[] features = new int[featureSizes[0]];
-		// System.out.println(categorySizes[0] + "!!!!");
 		for(int[] member : set)
 		{
 			features[member[0]]++;
 		}
 		int highest = 0;
-		
-
-
-		// System.out.println(Arrays.toString(features));
 		for(int i = 0; i < features.length; i++)
 		{
-			if(features[highest] > features[i])
+			if(features[highest] < features[i])
 				highest = i;
 		}
-		// System.out.println(highest + ":):)");
-
 		return highest;
 	}
 
-
-
-	public int maxGainIndex(double[] informationGain)
-	{
-		int currentMax = 1;
-		for(int i = 1; i < informationGain.length; i++)
-		{
-			if(informationGain[i] > informationGain[currentMax])
-			{
-				currentMax = i;
-			}
-		}
-		return currentMax;
-	}
+	// public int maxGainIndex(double[] informationGain)
+	// {
+	// 	int currentMax = 1;
+	// 	for(int i = 1; i < informationGain.length; i++)
+	// 	{
+	// 		if(informationGain[i] > informationGain[currentMax])
+	// 		{
+	// 			currentMax = i;
+	// 		}
+	// 	}
+	// 	return currentMax;
+	// }
 
 	public double[] calcInformationGain(ArrayList<int[]> set, ArrayList<Integer> visited)
 	{
 		double[] informationGain = new double[featureSizes.length];
-		informationGain[0] = Double.MIN_VALUE;
 		//go through all features, find its information gain
-		// visited[1] = true;
 		for(int i = 1; i < informationGain.length; i++)
 		{
 			if(!visited.contains(i))
@@ -340,7 +128,7 @@ class DecisionTree
 				{
 					 continue;
 				}
-				double entropy = calcEntropy(group);
+				// double entropy = calcEntropy(group);
 				gain -= ((double) group.size() / (double) set.size()) * calcEntropy(group);
 			}
 			informationGain[i] = gain;
@@ -354,7 +142,9 @@ class DecisionTree
 		for(int[] member : set)
 		{
 			if(member[0] != decision)
+			{
 				return false;
+			}
 		}
 		return true;
 	}
@@ -381,9 +171,6 @@ class DecisionTree
 		return entropy;
 	}
 
-	/**
-	 * TODO -- change this to a HashMap of array lists to ints. This will allow you control which decision corresponds to a certain subgroup
-	 */
 	public ArrayList<ArrayList<int[]>> getSubgroups(ArrayList<int[]> set, int feature)
 	{
 		int featureSize = featureSizes[feature];
@@ -416,32 +203,22 @@ class DecisionTree
 		return visiting.outcome;
 	}
 
-	public DecisionNode tuneTree(DecisionNode root, boolean whatever)
+	public void tuneTree(DecisionNode node)
 	{
-		return null;
-	}
-
-	public DecisionNode tuneTree(DecisionNode node)
-	{
-		if(node.terminal)
+		for(DecisionNode child : node.children)
 		{
-			return node;
+			if(child.terminal)
+				continue;
+			tuneTree(child);
 		}
-		else
+		double treeAccuracyBefore = treeAccuracy(this.root);
+		node.terminal = true;
+		double treeAccuracyAfter = treeAccuracy(this.root);
+		if(treeAccuracyBefore > treeAccuracyAfter)
 		{
-			for(DecisionNode child : node.children)
-			{
-
-				child.
-
-
-				return tuneTree(child);
-
-			}
+			node.terminal = false;
 		}
-		return null;
 	}
-
 	public double treeAccuracy(DecisionNode node)
 	{
 		double correct = 0;
@@ -449,8 +226,6 @@ class DecisionTree
 		{
 			if(group[0] == findOutcome(group, node))
 				correct++;
-			
-			// System.out.println(group[0] == findOutcome(group));
 		}
 		return correct / tuneSet.size();
 	}
@@ -459,6 +234,17 @@ class DecisionTree
 	{
 		VoteParser parser = new VoteParser("voting-data.tsv");
 		DecisionTree tree = new DecisionTree(parser);
+		System.out.println("BEFORE " + tree.treeAccuracy(tree.root));
 		parser.printDecisionTree(tree);
+		tree.tuneTree(tree.root);
+		
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+
+		System.out.println("AFTER " + tree.treeAccuracy(tree.root));
+		parser.printDecisionTree(tree);
+
 	}
 }

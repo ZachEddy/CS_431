@@ -12,8 +12,8 @@ class DecisionNode
 			children = new ArrayList<DecisionNode>();
 			this.terminal = terminal;
 			this.set = set;
-			this.feature = -1;
-			this.decision = -1;
-			this.outcome = -1;
+			this.feature = -50;
+			this.decision = -2;
+			this.outcome = -3;
 		}
 }

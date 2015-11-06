@@ -88,7 +88,8 @@ class VoteDataManager
 		}
 		catch(FileNotFoundException e)
 		{
-			System.out.println("File not found"); //+file name later
+			System.out.println("File \"" + this.file.getName() + "\" not found"); //+file name later
+			System.exit(-1);
 		}
 		return null;
 	}

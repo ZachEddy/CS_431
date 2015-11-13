@@ -40,6 +40,10 @@ The objective is straightforward - use the MiniMax algorithm to create a bot tha
 
 The Wumpus World game: https://en.wikipedia.org/wiki/Hunt_the_Wumpus
 
-The idea behind this assignment is to create a knowledge base for Wumpus World. As an agent explores this 
+This assignment reinforces the idea of creating a knowledge base. As a logical agent explores an environment, Wumpus World in this case, it records information about its surroundings. The knowledge base acts as a database of facts, expanding as more of the world is searched. The agent then queries its knowledge base to determine the safety of particular movement choices. 
+
+Prolog, as a programming Paradigm, works well to construct the knowledge base, but not for the actual exploring. A hybrid approach using logical and imperative languages could function in tandem to beat Wumpus World more easily (from an implementation standpoint). The knowledge base, designed with something like Prolog, would handle information the agent learns about its environment. An imperatively written program could act as the agent, making queries and assertions to the knowledge base to find the best move. This assignment just covers the knowledge base aspect of this approach.
+
+### Assignment 4 - Decision Trees
 
 

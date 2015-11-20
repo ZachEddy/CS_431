@@ -46,4 +46,16 @@ Prolog, as a programming Paradigm, works well to construct the knowledge base, b
 
 ### Assignment 4 - Decision Trees
 
+Decision Trees are used in machine learning for data classification. At their core, they split data into subgroups that yield the highest 'information gain'. Information gain quantitively measures the usefulness of a single data feature. For example, in sports, features like player weight, height, strength, etc. heavily determine their performance, but something like choice in facial hair, Gatorade preference, or K/D ratio in Call of Duty have almost no bearing on their atheltic performance. It's best to choose features that most effectively polarize data, and that's the purpose of information gain. The decision tree recursively divides data into subgroups using this metric until one of three conditions is met: 
+
+1) Splitting the data has no information gain
+
+2) Each member of the subgroup share the same label (all democrat, or all republican). In probaility, this is known as having a 'pure' dataset.
+
+3) The subgroup has no members. It's possible to split data three ways (or more), but only two subgroups actually have members.
+
+It is possible, however, to split data using on extraneous features as the recursive process deepens. This overfits the classifier, but has an easy fix: 
+
+For this assignment, we used ten votes from the House of Representatives to determine w
+
 

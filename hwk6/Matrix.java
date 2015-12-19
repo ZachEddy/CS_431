@@ -1,5 +1,11 @@
 /**
- * CITE THE PERSON YOU GOT THIS FROM
+ * I DID NOT MAKE THIS CLASS! ALL CREDIT GOES TO THE FOLLOWING AUTHORS:
+ * @author Robert Sedgewick 
+ * @author Kevin Wayne
+ * http://introcs.cs.princeton.edu/java/22library/Matrix.java.html
+ *
+ * "A bare-bones collection of static methods for manipulating
+ *  matrices."
  */
 public class Matrix {
 

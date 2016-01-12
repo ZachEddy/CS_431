@@ -46,16 +46,19 @@ Prolog, as a programming Paradigm, works well to construct the knowledge base, b
 
 ### Assignment 4 - Decision Trees
 
-Decision Trees are used in machine learning for data classification. At their core, they split data into subgroups that yield the highest 'information gain'. Information gain quantitively measures the usefulness of a single data feature. For example, in sports, features like player weight, height, strength, etc. heavily determine their performance, but something like choice in facial hair, Gatorade preference, or K/D ratio in Call of Duty have almost no bearing on their atheltic performance. It's best to choose features that most effectively polarize data, and that's the purpose of information gain. The decision tree recursively divides data into subgroups using this metric until one of three conditions is met: 
+Decision Trees are used in machine learning for data classification. At their core, they split data into subgroups that yield the highest 'information gain'. Information gain quantitatively measures the usefulness of a single data feature. For example, in sports, features like player weight, height, strength, etc. heavily determine their performance, but something like choice in facial hair, Gatorade preference, or K/D ratio in Call of Duty have almost no bearing on their athletic performance. It's best to choose features that most intelligently separate data. The decision tree recursively divides data into subgroups using this metric until one of three conditions is met:
 
 1) Splitting the data has no information gain
+2) Each member of the subgroup share the same label (all democrat, or all republican). This is known as having a 'pure' dataset.
+3) The subgroup has no members. This might occur when splitting data three ways (or more), but only two subgroups actually have members.
 
-2) Each member of the subgroup share the same label (all democrat, or all republican). In probaility, this is known as having a 'pure' dataset.
+It is possible, however, to split data on extraneous features as the recursive process deepens (Gatorade flavor). This results in overfitting, a term used to describe overly picky classifiers. This problem frequently occurs in decision trees, so I implemented a pruning algorithm to remove branches that yield a lower accuracy when classifying test data. This makes it more general to foreign data, and less focused on specific statistical trends that may uniquely occur within the training data.
 
-3) The subgroup has no members. It's possible to split data three ways (or more), but only two subgroups actually have members.
+For this assignment, we used ten votes from the House of Representatives to determine someone's political party. When comparing the decision tree's classification of a voter's party to their actual party (expected vs. actual), for all voters in the test set, the results were pleasing (~95% accuracy IIRC).
 
-It is possible, however, to split data using on extraneous features as the recursive process deepens. This overfits the classifier, but has an easy fix: 
+## Assignment 5 - K-Nearest Neighbor (kNN)
 
-For this assignment, we used ten votes from the House of Representatives to determine w
+
+
 
 

@@ -56,9 +56,12 @@ It is possible, however, to split data on extraneous features as the recursive p
 
 For this assignment, we used ten votes from the House of Representatives to determine someone's political party. When comparing the decision tree's classification of a voter's party to their actual party (expected vs. actual), for all voters in the test set, the results were pleasing (~95% accuracy IIRC).
 
-## Assignment 5 - K-Nearest Neighbor (kNN)
+## Assignment 5 - K-Means
+
+This is clustering algorithm used for unsupervised learning. The algorithm itself 
 
 
+## Assignment 6 - Independent choice (Neural Network and k-Nearest Neighbor)
 
 
 

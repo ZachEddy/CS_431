@@ -58,10 +58,13 @@ For this assignment, we used ten votes from the House of Representatives to dete
 
 ## Assignment 5 - K-Means
 
-This is clustering algorithm used for unsupervised learning. The algorithm itself 
+This is a clustering algorithm used for unsupervised learning. K-Means works by iteratively adjusting 'centroids', which is the geometric center of a cluster. The algorithm repeatedly reduces a centroid's total distance to each member in its cluster. The center, in this case, represents a point where the centroid's distance to each member in its cluster has been minimized. When no other point reduces this distance, the algorithm halts.
 
+Here's a great .gif that illustrates this process: https://www.projectrhea.org/rhea/images/e/ef/RunyanKmeans.gif
 
 ## Assignment 6 - Independent choice (Neural Network and k-Nearest Neighbor)
+
+
 
 
 

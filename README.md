@@ -18,30 +18,30 @@ familiar). You may if you wish use a different language such as C++ or Python. T
 will also be some work in Prolog, which is a programming language made to represent
 logic problems.
 
-### Assignment 1 - Slide Puzzle Solver
+## Slide Puzzle Solver
 
 Implemented A\*, a search algorithm, to quickly solve a [sliding puzzle](https://en.wikipedia.org/wiki/Sliding_puzzle).
 
-The GUI interface is provided by Adam.
+The GUI interface was provided by Adam.
 
-### Assignment 2 - Connect Four Bot
+## Connect Four Bot
 
 Made a MiniMax bot to play [Connect Four](https://en.wikipedia.org/wiki/Connect_Four) against itself or a human. At the highest difficulty, it usually ties itself and always beats me.
 
-The GUI interface is provided by Adam.
+The GUI interface was provided by Adam.
 
-### Assignment 3 - Wumpus World
+## Wumpus World
 
 Built an agent in Prolog that explores the [Wumpus World](https://cis.temple.edu/~ingargio/cis587/readings/wumpus.shtml) environment.
 
-### Assignment 4 - Decision Trees
+## Decision Tree
 
 Made a decision tree that classifies someone's political party based on their voting history for ten issues. It makes informed classifications after learning with ~500 examples. An example holds the voting history for a single person and their associated political party.
 
-## Assignment 5 - K-Means
+## k-Means Clustering
 
 Used K-Means to cluster Democrats and Republicans into two seperate groups based on how they voted for ten issues. The clustering process used ~500 examples (same data from the decision tree assignment).
 
-## Assignment 6 - Independent choice (Neural Network and k-Nearest Neighbor)
+## Neural Network and k-Nearest Neighbor
 
 Built a simple neural network to determine political party (same data from the decision tree assignment). This was more straightforward than I originally thought, so I also implemented k-Nearest Neighbor for the same task.

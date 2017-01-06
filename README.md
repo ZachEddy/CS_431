@@ -18,6 +18,8 @@ familiar). You may if you wish use a different language such as C++ or Python. T
 will also be some work in Prolog, which is a programming language made to represent
 logic problems.
 
+<i>The course page is available [here](http://mathcs.pugetsound.edu/~aasmith/cs431/).</i>
+
 ## Slide Puzzle Solver
 
 Implemented A\*, a search algorithm, to quickly solve a [sliding puzzle](https://en.wikipedia.org/wiki/Sliding_puzzle).
